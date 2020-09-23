@@ -19,6 +19,9 @@
 </head>
 <body>
     <div class="wrap mainWrap">
+        <!-- <div class="menu">
+            <a href="#popup">팝업 코드 만들기</a>
+        </div> -->
         <div class="setting">
             <!-- <span class="title">이미지 이름(확장명도) </span><input type="text" placeholder="img.jpg" class="imgName">
             <span class="title">이미지 가로 사이즈 </span><input type="text" placeholder="1080" class="imgWidth">
@@ -27,11 +30,17 @@
             <span class="title">버튼 링크1 </span><input type="text" placeholder="http://www.naver.com" class="btnLink"></label>
             <span class="title">버튼 링크2 </span><input type="text" placeholder="http://www.naver.com" class="btnLink"></label>
             <span class="title">버튼 위치 아래에서 </span><input type="text" placeholder="1.2">% 위로</label> -->
-            <p class="sectionTitle">팝업 코드 만들기</p>
-            <label><span class="title">1) 이미지 이름(확장자도) </span><input type="text" placeholder="img.jpg" class="imgName"></label>
-            <label><span class="title">2) 이미지 확장자 </span><input type="radio" value="jpg" class="fileEx">jpg <input type="radio" value="png" class="fileEx">png</label>
-            <label><span class="title">3) 게시물 주소 넘버 </span><input type="text" placeholder="881" class="boardUrl"></label>
-            <input type="submit" value="클릭" onclick="change()">
+            <div class="section1"> <!--팝업 코드 만들기-->
+                <p class="sectionTitle">팝업 코드 만들기</p>
+                <label><span class="title">1) 이미지 이름</span><input type="text" placeholder="200921st" class="imgName"></label>
+                <label><span class="title">2) 이미지 확장자</span><input type="radio" name="choose1" value="jpg" class="fileEx">jpg <input type="radio" name="choose1" value="png" class="fileEx">png</label>
+                <label><span class="title">3) 공지 주소 넘버</span><input type="text" placeholder="881" class="boardUrl"></label>
+                <input type="submit" value="클릭" onclick="change()">
+                <input type="submit" value="새로고침" onclick="window.location.reload()">
+            </div>
+            <div class="section2"> <!--코드 만들기-->
+
+            </div>
             <p class="warning"></p>
         </div>
         <div class="result">
@@ -56,24 +65,21 @@
                     // setting.appendChild(newInput);
                 }
             }
-           function change() {
+            function change() {
 
             // 팝업 코드 만들기
             var imgName = setting.getElementsByClassName("imgName")[0].value;
             var boardUrl = setting.getElementsByClassName("boardUrl")[0].value;
             var fileEx = setting.getElementsByClassName("fileEx");
             var fileExValue = '';
-            var radioCheck = 0;
-
             for(i=0; i<fileEx.length; i++) {
                 if(fileEx[i].checked) {
                     fileExValue = fileEx[i].value;
-                    radioCheck += 1;
-                }
-                if(imgName == '' || radioCheck = 0 || boardUrl == '') { //라디오박스가 하나도 선택안되었을때를 어케하지
-                    warning.innerHTML = "빈칸 안채웠거나 선택 안한게 있음!";
-                }
+                };
             }
+            if(imgName == '' || fileExValue == '' || boardUrl == '') {
+                    warning.innerHTML = "빈칸 안채웠거나 선택 안한게 있음!<br>새로고침 누르고 다시하세여";
+                }
 
             textarea.innerHTML = '<style type="text/css">body,html,img {padding:0; margin:0}</style><a href="http://mobilestock.etomato.com/mobilestock/NoticeView.aspx?Seq=' + boardUrl + '&amp;target=single&amp;title=공지사항" target="_blank"> <img src="http://ftp.etomato.com/etoftpuser2/' + imgName + '.' + fileExValue + '" style="vertical-align: bottom" width="100%" /> </a>';
             // // 이미지 이름
@@ -103,6 +109,7 @@
         //     }
            }
         </script>
+
         <div class="text" style="display: none">
             <!DOCTYPE html>
             <html lang="ko">
