@@ -27,14 +27,15 @@
                 <label><span class="title">1) 이미지 이름</span><input type="text" placeholder="200921st" class="imgName"></label>
                 <label><span class="title">2) 이미지 확장자</span><input type="radio" name="choose1" value="jpg" class="fileEx">jpg <input type="radio" name="choose1" value="png" class="fileEx">png</label>
                 <label><span class="title">3) 공지 주소 넘버</span><input type="text" placeholder="881" class="boardUrl"></label>
-                <input type="submit" value="클릭" onclick="change()">
+                <input type="submit" value="최종 클릭" onclick="change()">
             </div>
-            <div class="section2"> <!--코드 만들기-->
+            <div class="section2"> <!--공지 코드 만들기-->
                 <p class="sectionTitle">😃공지 코드 만들기</p>
                 <label><span class="title">1) 이미지 이름</span><input type="text" placeholder="200921st" class="imgName"></label>
                 <label><span class="title">2) 이미지 가로 사이즈 </span><input type="text" placeholder="1080" class="imgWidth"></label>
                 <label><span class="title">3) 버튼 개수 </span><input type="text" class="btnCount" placeholder="2"></label>
-                <label><input type="submit" value="버튼 개수 입력 후 클릭" onclick="create()"></label>
+                <label><input type="submit" value="버튼 개수 입력 후 클릭" onclick="addLinkCreate()"></label>
+                <label><input type="submit" value="최종 클릭" onclick="createBoardCode()"></label>
                 <!-- <label><span class="title">버튼 링크1 </span><input type="text" placeholder="http://www.naver.com" class="btnLink"></label></label>
                 <label><span class="title">버튼 링크2 </span><input type="text" placeholder="http://www.naver.com" class="btnLink"></label></label>
                 <label><span class="title">버튼 위치 아래에서 </span><input type="text" placeholder="1.2">% 위로</label></label> -->
@@ -53,22 +54,27 @@
             var warning = wrap[0].getElementsByClassName("warning")[0];
             var imgName = setting.getElementsByClassName("imgName");
             var section2 = setting.getElementsByClassName("section2")[0];
+            var addLink = section2.getElementsByClassName("addLink");
+
+            var btnCount = document.getElementsByClassName("btnCount")[0].value;
 
             // 공지 코드 만들기
-            function create() {
+            function addLinkCreate() {
                 var imgWidth = setting.getElementsByClassName("imgWidth")[0].value;
                 var btnCount = document.getElementsByClassName("btnCount")[0].value;
                 var span = section2.getElementsByTagName("span");
-
-                var newSpan = document.createElement("span");
-                newSpan.classList.add("title");
-                var newInput = document.createElement("input");
-                newInput.classList.add("btnName");
                 
-                for(i=0; i<btnCount; i++) {
+                // 버튼 개수만큼 input창 생성
+                for(i=1; i<=btnCount; i++) {
+                    var newSpan = document.createElement('span');
+                    newSpan.classList.add('title');
+                    var newInput = document.createElement('input');
+                    newInput.classList.add('btnName');
+                    newInput.classList.add('addLink');
+
                     section2.appendChild(newSpan);
                     span[span.length - 1].innerText = "버튼 링크" + i;
-                    section2.appendChild(newInput);
+                    section2.append(newInput);
                 }
 
                 // document.getElementsByClassName("mainImg")[0].src = "http://ftp.etomato.com/etoftpuser2/" + imgName[1].value;
@@ -97,7 +103,11 @@
 
 
 
-
+            function createBoardCode() {
+                for(q=0; q<btnCount; q++) {
+                    document.getElementsByClassName("wrap")[1].getElementsByTagName("a")[q].href = addLink[q].value;
+                }
+            }
 
 
 
