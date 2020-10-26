@@ -9,7 +9,8 @@
         * {margin: 0; padding: 0;}
         html, body {width: 100%; height: 100%; background-color: #264653; color: #a8dadc; font-family: 'Noto Sans KR', sans-serif; font-size: 20px; overflow: hidden;}
         .sectionTitle {margin-bottom: 10px; color: #e9c46a; font-size: 25px; font-weight: bold;}
-        .title {display: block; font-weight: bold;}
+        .btns {margin-top: 10px;}
+        .title {display: block; margin-top: 10px; font-weight: bold;}
         label {display: block; margin-bottom: 20px;}
         .warning {color: #e63946;}
         input {padding: 10px;}
@@ -17,6 +18,15 @@
         .mainWrap > div {float: left; width: 50%; height: 100%; padding: 10px; box-sizing: border-box;}
         .setting > div {margin-bottom: 100px;}
         .setting {overflow-y: scroll;}
+        input[type='submit'] {
+            background-color: #81b29a;
+            border: 0;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .clearAll {
+            background-color: #e07a5f !important;
+        }
     </style>
 </head>
 <body>
@@ -24,136 +34,33 @@
         <div class="setting">
             <div class="section1"> <!--팝업 코드 만들기-->
                 <p class="sectionTitle">😃팝업(400x400) 코드 만들기</p>
-                <label><span class="title">1) 이미지 이름</span><input type="text" placeholder="200921st" class="imgName"></label>
-                <label><span class="title">2) 이미지 확장자</span><input type="radio" name="choose1" value="jpg" class="fileEx">jpg <input type="radio" name="choose1" value="png" class="fileEx">png</label>
-                <label><span class="title">3) 공지 주소 넘버</span><input type="text" placeholder="881" class="boardUrl"></label>
-                <input type="submit" value="최종 클릭" onclick="change()">
+                <span class="title">1) 이미지 이름</span><input type="text" placeholder="200921st" class="imgName">
+                <span class="title">2) 이미지 확장자</span><input type="radio" name="choose1" value="jpg" class="fileEx">jpg <input type="radio" name="choose1" value="png" class="fileEx">png
+                <span class="title">3) 공지 주소 넘버</span><input type="text" placeholder="881" class="boardUrl">
+                <div class="btns">
+                    <input type="submit" value="최종 클릭" onclick="createPopupCode()">
+                    <input type="submit" value="새로고침" class="clearAll" onclick="window.location.reload()">
+                </div>
+                <p class="warning"></p>
             </div>
             <div class="section2"> <!--공지 코드 만들기-->
                 <p class="sectionTitle">😃공지 코드 만들기</p>
-                <label><span class="title">1) 이미지 이름</span><input type="text" placeholder="200921st" class="imgName"></label>
-                <label><span class="title">2) 이미지 가로 사이즈 </span><input type="text" placeholder="1080" class="imgWidth"></label>
-                <label><span class="title">3) 버튼 개수 </span><input type="text" class="btnCount" placeholder="2"></label>
-                <label><input type="submit" value="버튼 개수 입력 후 클릭" onclick="addLinkCreate()"></label>
-                <label><input type="submit" value="최종 클릭" onclick="createBoardCode()"></label>
-                <!-- <label><span class="title">버튼 링크1 </span><input type="text" placeholder="http://www.naver.com" class="btnLink"></label></label>
-                <label><span class="title">버튼 링크2 </span><input type="text" placeholder="http://www.naver.com" class="btnLink"></label></label>
-                <label><span class="title">버튼 위치 아래에서 </span><input type="text" placeholder="1.2">% 위로</label></label> -->
+                <span class="title">1) 이미지 이름</span><input type="text" placeholder="200921st" class="imgName">
+                <span class="title">2) 이미지 가로 사이즈 </span><input type="text" placeholder="1080" class="imgWidth">
+                <span class="title">3) 버튼 개수 </span><input type="text" class="btnCount" placeholder="2">
+                <input type="submit" value="버튼 개수 입력 후 클릭" onclick="addInput()">
+                <div class="addInputs"></div>
+                <div class="btns">
+                    <input type="submit" value="최종 클릭" onclick="createBoardCode()">
+                    <input type="submit" value="새로고침" class="clearAll" onclick="window.location.reload()">
+                </div>
             </div>
             <p class="warning"></p>
-            <input type="submit" value="새로고침" onclick="window.location.reload()">
         </div>
         <div class="result">
             <textarea name="" id="" cols="50" rows="50" class="textarea"></textarea>
         </div>
-        <script>
-            var setting = document.getElementsByClassName("setting")[0];
-            var wrap = document.getElementsByClassName("wrap");
-            var wrap1 = document.getElementsByClassName("wrap")[1];
-            var textarea = wrap[0].getElementsByClassName("textarea")[0];
-            var warning = wrap[0].getElementsByClassName("warning")[0];
-            var imgName = setting.getElementsByClassName("imgName");
-            var section2 = setting.getElementsByClassName("section2")[0];
-            var addLink = section2.getElementsByClassName("addLink");
-
-            var btnCount = document.getElementsByClassName("btnCount")[0].value;
-
-            // 공지 코드 만들기
-            function addLinkCreate() {
-                var imgWidth = setting.getElementsByClassName("imgWidth")[0].value;
-                var btnCount = document.getElementsByClassName("btnCount")[0].value;
-                var span = section2.getElementsByTagName("span");
-                
-                // 버튼 개수만큼 input창 생성
-                for(i=1; i<=btnCount; i++) {
-                    var newSpan = document.createElement('span');
-                    newSpan.classList.add('title');
-                    var newInput = document.createElement('input');
-                    newInput.classList.add('btnName');
-                    newInput.classList.add('addLink');
-
-                    section2.appendChild(newSpan);
-                    span[span.length - 1].innerText = "버튼 링크" + i;
-                    section2.append(newInput);
-                }
-
-                // document.getElementsByClassName("mainImg")[0].src = "http://ftp.etomato.com/etoftpuser2/" + imgName[1].value;
-
-                // wrap1.style = "width:" + imgWidth + "px;margin:auto;position:relative;";
-
-                // var addHtml = '<a><img src="http://ftp.etomato.com/etoftpuser2/emptyImg.png" style="width: 100%; height: 100%;" /></a>';
-                
-                
-                // 버튼 개수만큼 a img태그 html에 추가
-                for(i=0; i<btnCount; i++) {
-                    var a = document.createElement('a');
-                    var img = document.createElement('img');
-
-                    document.getElementsByClassName("wrap")[1].append(a);
-                    document.getElementsByClassName("wrap")[1].getElementsByTagName("a")[i].append(img);
-                }
-
-                //메인이미지 추가
-                // var mainImg = document.createElement('img');
-                // mainImg.classList.add('mainImg');
-                // mainImg.src = "http://ftp.etomato.com/etoftpuser2/" + imgName[1].value;
-                // document.getElementsByClassName("wrap")[1].append(mainImg);
-
-            }
-
-
-
-            function createBoardCode() {
-                for(q=0; q<btnCount; q++) {
-                    document.getElementsByClassName("wrap")[1].getElementsByTagName("a")[q].href = addLink[q].value;
-                }
-            }
-
-
-
-
-
-
-
-
-            // 팝업 코드 만들기
-            function change() {
-                var boardUrl = setting.getElementsByClassName("boardUrl")[0].value;
-                var fileEx = setting.getElementsByClassName("fileEx");
-                var fileExValue = '';
-
-                for(i=0; i<fileEx.length; i++) {
-                    if(fileEx[i].checked) {
-                        fileExValue = fileEx[i].value;
-                    };
-                }
-                if(imgName == '' || fileExValue == '' || boardUrl == '') {
-                        warning.innerHTML = "빈칸 안채웠거나 선택 안한게 있음!<br>새로고침 누르고 다시하세여";
-                    }
-
-                textarea.innerHTML = '<style type="text/css">body,html,img {padding:0; margin:0}</style><a href="http://mobilestock.etomato.com/mobilestock/NoticeView.aspx?Seq=' + boardUrl + '&amp;target=single&amp;title=공지사항" target="_blank"> <img src="http://ftp.etomato.com/etoftpuser2/' + imgName[0].value + '.' + fileExValue + '" style="vertical-align: bottom" width="100%" /> </a>';
-
-        //     // 버튼 이름
-        //     var btnName1 = setting.getElementsByClassName("btnName")[0].value;
-        //     var btnName2 = setting.getElementsByClassName("btnName")[1].value;
-
-        //     var btnLink1 = setting.getElementsByClassName("btnLink")[0].value;
-        //     var btnLink2 = setting.getElementsByClassName("btnLink")[1].value;
-
-        //     // 버튼 개수
-        //     var btnNumber1 = setting.getElementsByClassName("btnNumber")[0].value;
-        //     var btnNumber2 = setting.getElementsByClassName("btnNumber")[1].value;
-        //     var newDiv = document.createElement("div");
-        //     newDiv.style = "width:100%;position:absolute;"; //height,top 설정해야함
-        //     newDiv.innerHTML = "<a><img src='http://ftp.etomato.com/etoftpuser2/emptyImg.png' style='width:100%;height:100%;'></a>";
-        //     if (btnNumber1.checked = true) {
-        //         wrap[1].appendChild(newDiv);
-        //         wrap[1].children[1].children[0].href = btnLink1;
-        //     }
-           }
-        </script>
-
-        <div class="text" style="display: none">
+        <div class="complete" style="display: none">
             <!DOCTYPE html>
             <html lang="ko">
             <head>
@@ -167,12 +74,103 @@
                 </style>
             </head>
             <body>
-                <div class="wrap" style="width:100%;max-width:1080px;margin:0 auto;position:relative;">
+                <div class="wrap" style="width:100%;margin:0 auto;position:relative;">
                     <img src="" alt="이미지" class="mainImg">
                 </div>
             </body>
             </html>
         </div>
+
+
+
+
+<!-- 
+        1.스타일부터 복사
+        2.자동복사
+        3. -->
+
+
+
+
+
+
+        <script>
+            var wrap1 = document.getElementsByClassName("wrap")[1];
+            var textarea = document.getElementsByClassName("textarea")[0];
+            var warning = document.getElementsByClassName("warning")[0];
+            var imgName = document.getElementsByClassName("imgName");
+            var section2 = document.getElementsByClassName("section2")[0];
+
+            // 팝업 코드 만들기
+            function createPopupCode() {
+                var boardUrlV = document.getElementsByClassName("boardUrl")[0].value;
+                var fileEx = document.getElementsByClassName("fileEx");
+                var fileExV = '';
+
+                for(i=0; i<fileEx.length; i++) {
+                    if(fileEx[i].checked) {
+                        fileExV = fileEx[i].value;
+                    }
+                };
+
+                if(imgName === '' || fileEx === '' || boardUrlV === '') {
+                    document.getElementsByClassName("warning")[0].innerHTML = "빈칸 안채웠거나 선택 안한게 있음!<br>새로고침 누르고 다시하세여";
+                };
+
+                textarea.innerHTML = '<style type="text/css">body,html,img {padding:0; margin:0}</style><a href="http://mobilestock.etomato.com/mobilestock/NoticeView.aspx?Seq=' + boardUrlV + '&amp;target=single&amp;title=공지사항" target="_blank"> <img src="http://ftp.etomato.com/etoftpuser2/' + imgName[0].value + '.' + fileExV + '" style="vertical-align: bottom" width="100%" /> </a>';
+            }
+
+            // 공지 코드에서 버튼(입력창) 추가로 만들기
+            function addInput() {
+                var addInputs = document.getElementsByClassName("addInputs")[0];
+                var btnCount = document.getElementsByClassName("btnCount")[0].value;
+                var span = section2.getElementsByTagName("span");
+
+                for(i=1; i<=btnCount; i++) {
+                    var newSpan = document.createElement('span');
+                    newSpan.classList.add('title');
+                    var newInput = document.createElement('input');
+                    newInput.classList.add('btnName');
+                    newInput.classList.add('addLink');
+                    newInput.type = 'text';
+
+                    addInputs.appendChild(newSpan);
+                    span[span.length - 1].innerText = "버튼 링크" + i;
+                    addInputs.append(newInput);
+                }             
+            }
+
+            // 공지 코드 만들기
+            function createBoardCode() {
+                var imgWidthV = document.getElementsByClassName("imgWidth")[0].value;
+                var btnCountV = document.getElementsByClassName("btnCount")[0].value;
+                var addLink = section2.getElementsByClassName("addLink");
+
+                // 버튼 개수만큼 a태그 html에 추가
+                for(i=0; i<btnCountV; i++) {
+                    var newA = document.createElement('a');
+                    newA.style = 'position: absolute; width: 100%; left: 0; height: 1%; top: 1%';
+                    var newImg = document.createElement('img');
+                    newImg.src = 'http://ftp.etomato.com/etoftpuser2/emptyImg.png';
+
+                    document.getElementsByClassName("wrap")[1].append(newA);
+                    document.getElementsByClassName("wrap")[1].getElementsByTagName("a")[i].append(newImg);
+                };   
+
+                document.getElementsByClassName("mainImg")[0].src = "http://ftp.etomato.com/etoftpuser2/" + imgName[1].value;
+
+                wrap1.style = "max-width:" + imgWidthV + "px;margin:auto;position:relative;";
+
+                var addHtml = '<a><img src="http://ftp.etomato.com/etoftpuser2/emptyImg.png" style="width: 100%; height: 100%;" /></a>';
+
+                for(q=0; q<btnCountV; q++) {
+                    wrap1.getElementsByTagName("a")[q].href = addLink[q].value;
+                };
+
+                textarea.innerText = document.getElementsByClassName('complete')[0].innerHTML;
+            }
+
+        </script>
     </div>
 </body>
 </html>
