@@ -14,6 +14,7 @@
         label {display: block; margin-bottom: 20px;}
         .warning {color: #e63946;}
         input {padding: 10px;}
+        textarea {font-family: 'Noto Sans KR', sans-serif;}
         .mainWrap {width: 900px; height: 100%; margin: auto;}
         .mainWrap > div {float: left; width: 50%; height: 100%; padding: 10px; box-sizing: border-box;}
         .setting > div {margin-bottom: 100px;}
@@ -58,25 +59,20 @@
             <p class="warning"></p>
         </div>
         <div class="result">
-            <textarea name="" id="" cols="50" rows="50" class="textarea"></textarea>
+            <textarea name="" id="" cols="50" rows="30" class="textarea"></textarea>
         </div>
         <div class="complete" style="display: none">
-            <!DOCTYPE html>
-            <html lang="ko">
-            <head>
-                <meta charset="UTF-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>Document</title>
-                <style>
-                    * {margin: 0; padding: 0;}
-                </style>
-            </head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Document</title>
+            <style>
+                * {margin: 0; padding: 0;}
+            </style>
             <body>
                 <div class="wrap" style="width:100%;margin:0 auto;position:relative;">
-                    <img src="" alt="이미지" class="mainImg">
+                    <img src="" alt="이미지" class="mainImg" style="width: 100%;">
                 </div>
             </body>
-            </html>
         </div>
 
         <script>
@@ -103,6 +99,8 @@
                 };
 
                 textarea.innerHTML = '<style type="text/css">body,html,img {padding:0; margin:0}</style><a href="http://mobilestock.etomato.com/mobilestock/NoticeView.aspx?Seq=' + boardUrlV + '&amp;target=single&amp;title=공지사항" target="_blank"> <img src="http://ftp.etomato.com/etoftpuser2/' + imgName[0].value + '.' + fileExV + '" style="vertical-align: bottom" width="100%" /> </a>';
+                textarea.select(); // textarea의 value가 아니고 textarea자체를 복사해야한당
+                document.execCommand('copy');
             }
 
             // 공지 코드에서 버튼(입력창) 추가로 만들기
@@ -122,7 +120,11 @@
                     addInputs.appendChild(newSpan);
                     span[span.length - 1].innerText = "버튼 링크" + i;
                     addInputs.append(newInput);
-                }             
+                };
+
+                if(imgName === '' || imgWidthV === '') {
+                    document.getElementsByClassName("warning")[1].innerHTML = "빈칸 안채웠거나 선택 안한게 있음!<br>새로고침 누르고 다시하세여";
+                };        
             }
 
             // 공지 코드 만들기
@@ -140,10 +142,9 @@
 
                     document.getElementsByClassName("wrap")[1].append(newA);
                     document.getElementsByClassName("wrap")[1].getElementsByTagName("a")[i].append(newImg);
-                };   
+                };
 
                 document.getElementsByClassName("mainImg")[0].src = "http://ftp.etomato.com/etoftpuser2/" + imgName[1].value;
-                document.getElementsByClassName("mainImg")[0].style = "width: 100%;";
 
                 wrap1.style = "max-width:" + imgWidthV + "px;margin:auto;position:relative;";
 
@@ -153,7 +154,13 @@
                     wrap1.getElementsByTagName("a")[q].href = addLink[q].value;
                 };
 
+                if(imgName === '' || imgWidthV === '') {
+                    document.getElementsByClassName("warning")[1].innerHTML = "빈칸 안채웠거나 선택 안한게 있음!<br>새로고침 누르고 다시하세여";
+                };
+
                 textarea.innerText = document.getElementsByClassName('complete')[0].innerHTML;
+                textarea.select();
+                document.execCommand('copy');
             }
 
         </script>
