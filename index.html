@@ -69,8 +69,6 @@
                 <title>Document</title>
                 <style>
                     * {margin: 0; padding: 0;}
-                    .wrap {margin: auto;}
-                    .mainImg {width: 100%;}
                 </style>
             </head>
             <body>
@@ -80,19 +78,6 @@
             </body>
             </html>
         </div>
-
-
-
-
-<!-- 
-        1.스타일부터 복사
-        2.자동복사
-        3. -->
-
-
-
-
-
 
         <script>
             var wrap1 = document.getElementsByClassName("wrap")[1];
@@ -158,6 +143,7 @@
                 };   
 
                 document.getElementsByClassName("mainImg")[0].src = "http://ftp.etomato.com/etoftpuser2/" + imgName[1].value;
+                document.getElementsByClassName("mainImg")[0].style = "width: 100%;";
 
                 wrap1.style = "max-width:" + imgWidthV + "px;margin:auto;position:relative;";
 
