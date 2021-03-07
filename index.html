@@ -55,8 +55,8 @@
                     <input type="submit" value="최종 클릭" onclick="createBoardCode()">
                     <input type="submit" value="새로고침" class="clearAll" onclick="window.location.reload()">
                 </div>
+                <p class="warning"></p>
             </div>
-            <p class="warning"></p>
         </div>
         <div class="result">
             <textarea name="" id="" cols="50" rows="30" class="textarea"></textarea>
@@ -94,12 +94,12 @@
                     }
                 };
 
-                if(imgName === '' || fileEx === '' || boardUrlV === '') {
+                if(imgName === '' || fileExV === '' || boardUrlV === '') {
                     document.getElementsByClassName("warning")[0].innerHTML = "빈칸 안채웠거나 선택 안한게 있음!<br>새로고침 누르고 다시하세여";
                 };
 
-                textarea.innerHTML = '<style type="text/css">body,html,img {padding:0; margin:0}</style><a href="http://mobilestock.etomato.com/mobilestock/NoticeView.aspx?Seq=' + boardUrlV + '&amp;target=single&amp;title=공지사항" target="_blank"> <img src="http://ftp.etomato.com/etoftpuser2/' + imgName[0].value + '.' + fileExV + '" style="vertical-align: bottom" width="100%" /> </a>';
-                textarea.select(); // textarea의 value가 아니고 textarea자체를 복사해야한당
+                textarea.innerHTML = '<style type="text/css">body,html,img {padding:0; margin:0}</style><a href="http://aaa.peamexxtest.com/mobile/NoticeView.aspx?Seq=' + boardUrlV + '&amp;target=single&amp;title=공지사항" target="_blank"> <img src="http://ftp.peamexxtest.com/peamexx/' + imgName[0].value + '.' + fileExV + '" style="vertical-align: bottom" width="100%" /> </a>';
+                textarea.select(); // textarea의 value가 아니고 textarea자체를 선택해야한당
                 document.execCommand('copy');
             }
 
@@ -138,17 +138,17 @@
                     var newA = document.createElement('a');
                     newA.style = 'position: absolute; width: 100%; left: 0; height: 1%; top: 1%';
                     var newImg = document.createElement('img');
-                    newImg.src = 'http://ftp.etomato.com/etoftpuser2/emptyImg.png';
+                    newImg.src = 'http://ftp.peamexxtest.com/peamexx/emptyImg.png';
 
                     document.getElementsByClassName("wrap")[1].append(newA);
                     document.getElementsByClassName("wrap")[1].getElementsByTagName("a")[i].append(newImg);
                 };
 
-                document.getElementsByClassName("mainImg")[0].src = "http://ftp.etomato.com/etoftpuser2/" + imgName[1].value;
+                document.getElementsByClassName("mainImg")[0].src = "http://ftp.peamexxtest.com/peamexx/" + imgName[1].value + ".img";
 
                 wrap1.style = "max-width:" + imgWidthV + "px;margin:auto;position:relative;";
 
-                var addHtml = '<a><img src="http://ftp.etomato.com/etoftpuser2/emptyImg.png" style="width: 100%; height: 100%;" /></a>';
+                var addHtml = '<a><img src="http://ftp.peamexxtest.com/peamexx/emptyImg.png" style="width: 100%; height: 100%;" /></a>';
 
                 for(q=0; q<btnCountV; q++) {
                     wrap1.getElementsByTagName("a")[q].href = addLink[q].value;
